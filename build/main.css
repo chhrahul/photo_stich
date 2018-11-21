@@ -25674,6 +25674,34 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+.photo-button {
+  font-size: 50px;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.footer-bar {
+  padding-bottom: 30px;
+  padding-bottom: calc(30px + constant(safe-area-inset-bottom)) !important;
+  padding-bottom: calc(30px + env(safe-area-inset-bottom)) !important;
+  min-height: 110px;
+  min-height: calc(110px + constant(safe-area-inset-bottom)) !important;
+  min-height: calc(110px + env(safe-area-inset-bottom)) !important;
+}
+
+ion-row {
+  overflow-x: scroll;
+}
+
+.thumbnail {
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  min-height: 60px;
+}
+
 /* #Style Login flat
 ================================================*/
 login-flat-page {

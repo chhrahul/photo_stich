@@ -73,7 +73,7 @@ var LoginPage = /** @class */ (function () {
     ], LoginPage.prototype, "events", void 0);
     LoginPage = LoginPage_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-login',template:/*ion-inline-start:"C:\Users\Hunar\photo_stich\src\pages\login\login.html"*/'<!--\n  Generated template for the LoginPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Login</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<!-- Themes  register-flat-->\n<ion-content padding>\n  <ion-grid no-padding>\n    <!-- logo -->\n    <ion-row header align-items-start align-items-stretch>\n      <ion-col col-10 offset-1 col-md-6 offset-md-3 text-center>\n        <img logo src="../../assets/imgs/logo.png" style="max-width:60%;" />\n      </ion-col>\n\n    <!-- Section form>-->\n  <ion-col col-10 offset-1 col-md-6 offset-md-3>\n    <form padding>\n      <ion-row align-items-start>\n        <ion-col col-12>\n          <h1><strong>Login</strong> </h1>\n        </ion-col>\n      </ion-row>\n      <!-- Input-field -->\n      <ion-row>\n                                         \n        <ion-col col-12>\n          <div input-field>\n            <!-- Input-field-text -->\n            <ion-item no-padding>\n              <ion-input type="text" placeholder="Username" [(ngModel)]="username" [ngModelOptions]="{standalone: true}"></ion-input>\n           </ion-item>\n            <!-- Input-field-password -->\n            <ion-item no-padding>\n              <ion-input type="password" placeholder="Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"></ion-input>\n             \n            </ion-item>\n          </div>\n          <!-- Login button -->\n          <ion-col col-12 no-padding>\n            <button no-margin ion-button full text-uppercase (click)="loginme(username,password)">Login</button>\n          </ion-col>\n          <!-- Description -->\n          <div description text-center>\n            <ion-row>\n              <!-- Reset your password button -->\n              <ion-col col-12 no-padding no-margin>\n                <p no-margin no-padding><a>Forgot Password?</a> </p>\n              </ion-col>\n              <!-- Signup now button -->\n              <ion-col col-12padding>\n                <p no-margin no-padding><a>Sign up!</a> </p>\n              </ion-col>\n            </ion-row>\n          </div>\n        </ion-col>\n      </ion-row>\n    </form>\n    </ion-col>\n        </ion-row>\n  </ion-grid>\n</ion-content>\n\n\n\n\n'/*ion-inline-end:"C:\Users\Hunar\photo_stich\src\pages\login\login.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"C:\Users\Hunar\photo_stich\src\pages\login\login.html"*/'<!--\n  Generated template for the LoginPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Login</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<!-- Themes  register-flat-->\n<ion-content padding>\n  <ion-grid no-padding>\n    <!-- logo -->\n    <ion-row header align-items-start align-items-stretch>\n      <ion-col col-10 offset-1 col-md-6 offset-md-3 text-center>\n        <img logo src="../../assets/imgs/logo.png" style="max-width:60%;" />\n      </ion-col>\n\n    <!-- Section form>-->\n  <ion-col col-10 offset-1 col-md-6 offset-md-3>\n    <form padding>\n      <ion-row align-items-start>\n        <ion-col col-12>\n          <h1><strong>Login</strong> </h1>\n        </ion-col>\n      </ion-row>\n      <!-- Input-field -->\n      <ion-row>\n                                         \n        <ion-col col-12>\n          <div input-field>\n            <!-- Input-field-text -->\n            <ion-item no-padding>\n              <ion-input type="text" placeholder="Username" [(ngModel)]="username" [ngModelOptions]="{standalone: true}"></ion-input>\n           </ion-item>\n            <!-- Input-field-password -->\n            <ion-item no-padding>\n              <ion-input type="password" placeholder="Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"></ion-input>\n             \n            </ion-item>\n          </div>\n          <!-- Login button -->\n          <ion-col col-12 no-padding>\n            <button no-margin ion-button full text-uppercase (click)="loginme(username,password)">Login</button>\n          </ion-col>\n          <!-- Description -->\n         <br />\n          <div description text-center>\n            <ion-row>\n              <!-- Reset your password button -->\n              <ion-col col-12 no-padding no-margin>\n                <p no-margin no-padding><a>Forgot Password?</a> </p>\n              </ion-col>\n              <!-- Signup now button -->\n              <ion-col col-12padding>\n                <p no-margin no-padding><a>Sign up!</a> </p>\n              </ion-col>\n            </ion-row>\n          </div>\n        </ion-col>\n      </ion-row>\n    </form>\n    </ion-col>\n        </ion-row>\n  </ion-grid>\n</ion-content>\n\n\n\n\n'/*ion-inline-end:"C:\Users\Hunar\photo_stich\src\pages\login\login.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */]])
     ], LoginPage);
@@ -182,6 +182,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+//import { mergeImages } from 'merge-images';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -417,6 +418,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+//import { mergeImages } from 'merge-images';
 /**
  * Generated class for the DashboardPage page.
  *
@@ -439,7 +441,9 @@ var DashboardPage = /** @class */ (function () {
             quality: 50,
             destinationType: this.camera.DestinationType.DATA_URL,
             encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE
+            mediaType: this.camera.MediaType.PICTURE,
+            allowEdit: true,
+            correctOrientation: true
         };
         this.camera.getPicture(options).then(function (imageData) {
             _this.base64Image = "data:image/jpeg;base64," + imageData;
