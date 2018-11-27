@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 274:
+/***/ 279:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22,7 +22,7 @@ var ProjectPageModule = /** @class */ (function () {
     function ProjectPageModule() {
     }
     ProjectPageModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_2__project__["a" /* ProjectPage */],
             ],

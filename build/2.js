@@ -1,6 +1,6 @@
 webpackJsonp([2],{
 
-/***/ 275:
+/***/ 278:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22,7 +22,7 @@ var LoginPageModule = /** @class */ (function () {
     function LoginPageModule() {
     }
     LoginPageModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */],
             ],
