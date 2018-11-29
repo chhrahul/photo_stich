@@ -48,12 +48,32 @@ var ProjectPage = /** @class */ (function () {
     ProjectPage.prototype.ngOnInit = function () {
         this.photos = [];
     };
+    ProjectPage.prototype.takeanotherphoto = function () {
+        var _this = this;
+        var croppedImgB64String = this.angularCropper.cropper.getCroppedCanvas().toDataURL('image/jpeg', (100 / 100));
+        this.photos.push(croppedImgB64String);
+        this.photos.reverse();
+        this.myImage = null;
+        var options = {
+            quality: 50,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
+            allowEdit: false,
+            correctOrientation: true
+        };
+        this.camera.getPicture(options).then(function (imageData) {
+            _this.base64Image = "data:image/jpeg;base64," + imageData;
+            _this.myImage = 'data:image/jpeg;base64,' + imageData;
+        }, function (err) {
+            console.log(err);
+        });
+    };
     ProjectPage.prototype.save = function () {
         var croppedImgB64String = this.angularCropper.cropper.getCroppedCanvas().toDataURL('image/jpeg', (100 / 100));
         this.photos.push(croppedImgB64String);
         this.photos.reverse();
         this.myImage = null;
-        //this.croppedImage = croppedImgB64String;
     };
     ProjectPage.prototype.takePhoto = function () {
         var _this = this;
@@ -82,6 +102,7 @@ var ProjectPage = /** @class */ (function () {
     };
     ProjectPage.prototype.clear = function () {
         this.angularCropper.cropper.clear();
+        this.myImage = null;
     };
     ProjectPage.prototype.deletePhoto = function (index) {
         var _this = this;
@@ -110,16 +131,16 @@ var ProjectPage = /** @class */ (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('angularCropper'),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_angular_cropperjs__["AngularCropperjsComponent"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angular_cropperjs__["AngularCropperjsComponent"]) === "function" && _a || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2_angular_cropperjs__["AngularCropperjsComponent"])
     ], ProjectPage.prototype, "angularCropper", void 0);
     ProjectPage = ProjectPage_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-project',template:/*ion-inline-start:"C:\Users\Hunar\photo_stich\src\pages\project\project.html"*/'<!--\n  Generated template for the DashboardPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n<ion-navbar>\n  <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Project</ion-title>\n  </ion-navbar>\n   <ion-toolbar  *ngIf="myImage">\n    <ion-buttons start>\n      \n    </ion-buttons>\n    <ion-title>Choose Mark Points</ion-title>\n    <ion-buttons end>\n   \n      <button ion-button icon-only color="secondary" (click)="save()">\n        <ion-icon name="checkmark"></ion-icon>\n      </button>\n      \n      <button ion-button icon-only color="secondary" (click)="takephoto()">\n        Take Another Photo\n      </button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>  \n<ion-content padding>\n    <ion-row align-items-start text-center  *ngIf="!myImage">\n        <ion-col col-12 >\n          <div input-field>\n             <button ion-button round (click)="takePhoto()" >\n                <ion-icon name="camera"></ion-icon> &nbsp;Take Another Photo \n             </button>          \n         </div>\n      </ion-col>\n    </ion-row>  \n    \n    <ion-row align-items-start text-center  *ngIf="myImage">\n        <ion-col col-12 >\n          <div input-field>\n             <button ion-button round (click)="takePhoto()" style="visibility:hidden">\n                <ion-icon name="camera"></ion-icon> &nbsp;Take Another Photo \n             </button>          \n         </div>\n      </ion-col>\n    </ion-row>      \n       \n    \n    <angular-cropper #angularCropper [cropperOptions]="cropperOptions" [imageUrl]="myImage" *ngIf="myImage"></angular-cropper>\n\n  \n <ion-row align-items-start text-center>\n     <ion-col col-6 *ngFor="let photo of photos; let id = index">\n        <ion-card class="block">\n          <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>\n          <img [src]="photo" *ngIf="photo" />\n        </ion-card>\n      </ion-col>\n    </ion-row> \n    \n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Hunar\photo_stich\src\pages\project\project.html"*/,
+            selector: 'page-project',template:/*ion-inline-start:"C:\Users\Hunar\photo_stich\src\pages\project\project.html"*/'<!--\n  Generated template for the DashboardPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n<ion-navbar>\n  <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Project</ion-title>\n  </ion-navbar>\n   <ion-toolbar  *ngIf="myImage">\n    <ion-buttons start>\n      \n    </ion-buttons>\n    <ion-title>Choose Mark Points</ion-title>\n    <ion-buttons end>\n   \n      <button ion-button icon-only color="danger" (click)="clear()">\n        <ion-icon name="close"></ion-icon>\n      </button>\n      \n      <button ion-button icon-only color="secondary" (click)="save()">\n        <ion-icon name="checkmark"></ion-icon>\n      </button>\n      \n      <button ion-button icon-only color="secondary" (click)="takeanotherphoto()">\n        <ion-icon name="camera"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>  \n<ion-content padding>\n    <ion-row align-items-start text-center  *ngIf="!myImage">\n        <ion-col col-12 >\n          <div input-field>\n             <button ion-button round (click)="takePhoto()" >\n                <ion-icon name="camera"></ion-icon> &nbsp;Take Another Photo \n             </button>          \n         </div>\n      </ion-col>\n    </ion-row>  \n    \n    <ion-row align-items-start text-center  *ngIf="myImage">\n        <ion-col col-12 >\n          <div input-field>\n             <button ion-button round (click)="takePhoto()" style="visibility:hidden">\n                <ion-icon name="camera"></ion-icon> &nbsp;Take Another Photo \n             </button>          \n         </div>\n      </ion-col>\n    </ion-row>      \n       \n    \n    <angular-cropper #angularCropper [cropperOptions]="cropperOptions" [imageUrl]="myImage" *ngIf="myImage"></angular-cropper>\n\n  \n <ion-row align-items-start text-center>\n     <ion-col col-6 *ngFor="let photo of photos; let id = index">\n        <ion-card class="block">\n          <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>\n          <img [src]="photo" *ngIf="photo" />\n        </ion-card>\n      </ion-col>\n    </ion-row> \n    <ion-row align-items-start text-center  *ngIf="myImage">\n        <ion-col col-12 >\n          <div input-field>\n             <button ion-button round (click)="takePhoto()">\n                <ion-icon name="camera"></ion-icon> &nbsp;Stich Photos \n             </button>          \n         </div>\n      </ion-col>\n    </ion-row>\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Hunar\photo_stich\src\pages\project\project.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
     ], ProjectPage);
     return ProjectPage;
-    var ProjectPage_1, _a, _b, _c, _d, _e;
+    var ProjectPage_1;
 }());
 
 //# sourceMappingURL=project.js.map
@@ -241,11 +262,11 @@ var map = {
 		3
 	],
 	"../pages/login/login.module": [
-		278,
+		279,
 		2
 	],
 	"../pages/project/project.module": [
-		279,
+		278,
 		1
 	]
 };
@@ -319,7 +340,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-//import { mergeImages } from 'merge-images';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -339,8 +359,8 @@ var AppModule = /** @class */ (function () {
                     links: [
                         { loadChildren: '../components/login/login-flat/login-flat.module#LoginFlatModule', name: 'LoginFlat', segment: 'login-flat', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/project/project.module#ProjectPageModule', name: 'ProjectPage', segment: 'project', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/project/project.module#ProjectPageModule', name: 'ProjectPage', segment: 'project', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_11_angular_cropperjs__["AngularCropperjsModule"]
