@@ -4,6 +4,122 @@ webpackJsonp([4],{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_multi_camera__ = __webpack_require__(155);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_photo_viewer__ = __webpack_require__(163);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+//import { AngularCropperjsComponent } from 'angular-cropperjs'; 
+
+
+var ProjectPage = /** @class */ (function () {
+    // @ViewChild('angularCropper') public angularCropper: AngularCropperjsComponent;
+    function ProjectPage(photoViewer, camera, navCtrl, navParams, alertCtrl) {
+        this.photoViewer = photoViewer;
+        this.camera = camera;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.alertCtrl = alertCtrl;
+        this.takePhoto();
+    }
+    ProjectPage_1 = ProjectPage;
+    ProjectPage.prototype.ngOnInit = function () {
+        this.photos = [];
+    };
+    ProjectPage.prototype.takePhoto = function () {
+        var _this = this;
+        var options = {
+            quality: 50,
+        };
+        var pictureOptions = {
+            quality: 80,
+            width: 4096,
+            height: 4096
+        };
+        var translations = {
+            cancel: 'Cancel',
+            finish: 'Finish',
+            auto: 'AUTO',
+            on: 'On',
+            off: 'Off'
+        };
+        this.camera.getPicture(pictureOptions).then(function (imageData) {
+            ///alert(JSON.stringify(imageData))
+            for (_this.i = 0; _this.i < imageData.length; _this.i++) {
+                //alert(JSON.stringify(imageData[this.i].fileEntry.nativeURL));
+                _this.photos.push("data:image/jpeg;base64," + imageData[_this.i].base64Data);
+                _this.photos.reverse();
+                //alert(JSON.stringify(imageData[this.i].base64Data))
+            }
+            //this.photos = imageData.base64Data;
+            //this.base64Image = "data:image/jpeg;base64," + imageData;
+            // this.photos.push(this.base64Image);
+            // this.photos.reverse(); 
+            //this.myImage = 'data:image/jpeg;base64,' + imageData;
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    ProjectPage.prototype.openphoto = function (img) {
+        this.photoViewer.show(img);
+    };
+    ProjectPage.prototype.taketoProject = function () {
+        this.navCtrl.setRoot(ProjectPage_1);
+    };
+    ProjectPage.prototype.deletePhoto = function (index) {
+        var _this = this;
+        var confirm = this.alertCtrl.create({
+            title: 'Sure you want to delete this photo? There is NO undo!',
+            message: '',
+            buttons: [
+                {
+                    text: 'No',
+                    handler: function () {
+                        console.log('Disagree clicked');
+                    }
+                }, {
+                    text: 'Yes',
+                    handler: function () {
+                        console.log('Agree clicked');
+                        _this.photos.splice(index, 1);
+                    }
+                }
+            ]
+        });
+        confirm.present();
+    };
+    ProjectPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ProjectPage');
+    };
+    ProjectPage = ProjectPage_1 = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'page-project',template:/*ion-inline-start:"C:\Users\Hunar\photo_stich\src\pages\project\project.html"*/'<!--\n  Generated template for the DashboardPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n<ion-navbar>\n  <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Project</ion-title>\n  </ion-navbar>\n</ion-header>  \n<ion-content padding style="background:#FFF !important;">\n<div>\n    <ion-row align-items-start text-center>\n        <ion-col col-12>\n           <div input-field>\n             <button ion-button round (click)="takePhoto()" >\n                <ion-icon name="camera"></ion-icon> &nbsp;Take Another Photo \n             </button>          \n           </div>\n        </ion-col>\n    </ion-row>\n   <!-- <angular-cropper #angularCropper [cropperOptions]="cropperOptions" [imageUrl]="myImage" *ngIf="myImage"></angular-cropper> -->\n    <ion-row align-items-start text-center>\n       <ion-col col-6 *ngFor="let photo of photos; let id = index">\n          <ion-card class="block">\n            <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)" style="height:15px;"></ion-icon>\n            <a (click)="openphoto(photo);"><img [src]="photo" *ngIf="photo" /></a>\n          </ion-card>\n        </ion-col>\n    </ion-row> \n    <ion-row align-items-start text-center>\n        <ion-col col-12>\n          <div input-field>\n             <button ion-button round (click)="stichPhoto()">\n                Stich Photos \n             </button>          \n         </div>\n      </ion-col>\n    </ion-row>\n    </div>\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Hunar\photo_stich\src\pages\project\project.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__ionic_native_photo_viewer__["a" /* PhotoViewer */], __WEBPACK_IMPORTED_MODULE_2_ionic_multi_camera__["a" /* IonicMultiCamera */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+    ], ProjectPage);
+    return ProjectPage;
+    var ProjectPage_1;
+}());
+
+//# sourceMappingURL=project.js.map
+
+/***/ }),
+
+/***/ 103:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
@@ -85,116 +201,6 @@ var LoginPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 103:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_multi_camera__ = __webpack_require__(155);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-//import { AngularCropperjsComponent } from 'angular-cropperjs'; 
-
-var ProjectPage = /** @class */ (function () {
-    // @ViewChild('angularCropper') public angularCropper: AngularCropperjsComponent;
-    function ProjectPage(camera, navCtrl, navParams, alertCtrl) {
-        this.camera = camera;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.alertCtrl = alertCtrl;
-        this.takePhoto();
-    }
-    ProjectPage_1 = ProjectPage;
-    ProjectPage.prototype.ngOnInit = function () {
-        this.photos = [];
-    };
-    ProjectPage.prototype.takePhoto = function () {
-        var _this = this;
-        var options = {
-            quality: 50,
-        };
-        var pictureOptions = {
-            quality: 80,
-            width: 4096,
-            height: 4096
-        };
-        var translations = {
-            cancel: 'Cancel',
-            finish: 'Finish',
-            auto: 'AUTO',
-            on: 'On',
-            off: 'Off'
-        };
-        this.camera.getPicture(pictureOptions).then(function (imageData) {
-            ///alert(JSON.stringify(imageData))
-            for (_this.i = 0; _this.i < imageData.length; _this.i++) {
-                //alert(JSON.stringify(imageData[this.i].fileEntry.nativeURL));
-                _this.photos.push("data:image/jpeg;base64," + imageData[_this.i].base64Data);
-                _this.photos.reverse();
-                //alert(JSON.stringify(imageData[this.i].base64Data))
-            }
-            //this.photos = imageData.base64Data;
-            //this.base64Image = "data:image/jpeg;base64," + imageData;
-            // this.photos.push(this.base64Image);
-            // this.photos.reverse(); 
-            //this.myImage = 'data:image/jpeg;base64,' + imageData;
-        }, function (err) {
-            console.log(err);
-        });
-    };
-    ProjectPage.prototype.taketoProject = function () {
-        this.navCtrl.setRoot(ProjectPage_1);
-    };
-    ProjectPage.prototype.deletePhoto = function (index) {
-        var _this = this;
-        var confirm = this.alertCtrl.create({
-            title: 'Sure you want to delete this photo? There is NO undo!',
-            message: '',
-            buttons: [
-                {
-                    text: 'No',
-                    handler: function () {
-                        console.log('Disagree clicked');
-                    }
-                }, {
-                    text: 'Yes',
-                    handler: function () {
-                        console.log('Agree clicked');
-                        _this.photos.splice(index, 1);
-                    }
-                }
-            ]
-        });
-        confirm.present();
-    };
-    ProjectPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ProjectPage');
-    };
-    ProjectPage = ProjectPage_1 = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-project',template:/*ion-inline-start:"C:\Users\Hunar\photo_stich\src\pages\project\project.html"*/'<!--\n  Generated template for the DashboardPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n<ion-navbar>\n  <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Project</ion-title>\n  </ion-navbar>\n</ion-header>  \n<ion-content padding style="background:#FFF !important;">\n<div >\n    <ion-row align-items-start text-center>\n        <ion-col col-12 >\n          <div input-field>\n             <button ion-button round (click)="takePhoto()" >\n                <ion-icon name="camera"></ion-icon> &nbsp;Take Another Photo \n             </button>          \n         </div>\n      </ion-col>\n    </ion-row>    \n       \n    \n   <!-- <angular-cropper #angularCropper [cropperOptions]="cropperOptions" [imageUrl]="myImage" *ngIf="myImage"></angular-cropper> -->\n\n  \n <ion-row align-items-start text-center>\n     <ion-col col-6 *ngFor="let photo of photos; let id = index">\n        <ion-card class="block">\n          <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>\n          <img [src]="photo" *ngIf="photo" />\n        </ion-card>\n      </ion-col>\n    </ion-row> \n    <ion-row align-items-start text-center  *ngIf="myImage">\n        <ion-col col-12 >\n          <div input-field>\n             <button ion-button round (click)="takePhoto()">\n                <ion-icon name="camera"></ion-icon> &nbsp;Stich Photos \n             </button>          \n         </div>\n      </ion-col>\n    </ion-row>\n    </div>\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Hunar\photo_stich\src\pages\project\project.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_multi_camera__["a" /* IonicMultiCamera */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
-    ], ProjectPage);
-    return ProjectPage;
-    var ProjectPage_1;
-}());
-
-//# sourceMappingURL=project.js.map
-
-/***/ }),
-
 /***/ 113:
 /***/ (function(module, exports) {
 
@@ -217,7 +223,7 @@ webpackEmptyAsyncContext.id = 113;
 
 var map = {
 	"../components/login/login-flat/login-flat.module": [
-		285,
+		286,
 		0
 	],
 	"../pages/dashboard/dashboard.module": [
@@ -225,11 +231,11 @@ var map = {
 		3
 	],
 	"../pages/login/login.module": [
-		286,
+		288,
 		2
 	],
 	"../pages/project/project.module": [
-		288,
+		289,
 		1
 	]
 };
@@ -249,13 +255,13 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 204:
+/***/ 205:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(205);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(228);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -263,24 +269,25 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 227:
+/***/ 228:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(282);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(283);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(284);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_login_login__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_project_project__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(285);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_login_login__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_project_project__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_dashboard_dashboard__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_status_bar__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_splash_screen__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_splash_screen__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic_multi_camera__ = __webpack_require__(155);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_camera__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_camera__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_photo_viewer__ = __webpack_require__(163);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -301,6 +308,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 //import { AngularCropperjsModule } from 'angular-cropperjs';
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -319,8 +327,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../components/login/login-flat/login-flat.module#LoginFlatModule', name: 'LoginFlat', segment: 'login-flat', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/project/project.module#ProjectPageModule', name: 'ProjectPage', segment: 'project', priority: 'low', defaultHistory: [] }
                     ]
                 }),
@@ -338,6 +346,7 @@ var AppModule = /** @class */ (function () {
             providers: [
                 __WEBPACK_IMPORTED_MODULE_9__ionic_native_status_bar__["a" /* StatusBar */],
                 __WEBPACK_IMPORTED_MODULE_10__ionic_native_splash_screen__["a" /* SplashScreen */],
+                __WEBPACK_IMPORTED_MODULE_13__ionic_native_photo_viewer__["a" /* PhotoViewer */],
                 __WEBPACK_IMPORTED_MODULE_12__ionic_native_camera__["a" /* Camera */],
                 { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicErrorHandler */] }
             ]
@@ -350,7 +359,7 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 282:
+/***/ 283:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -358,9 +367,9 @@ var AppModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_dashboard_dashboard__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(103);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -428,7 +437,7 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 283:
+/***/ 284:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -463,7 +472,7 @@ var HomePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 284:
+/***/ 285:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -527,8 +536,8 @@ var ListPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_project_project__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_project_project__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(164);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -618,5 +627,5 @@ var DashboardPage = /** @class */ (function () {
 
 /***/ })
 
-},[204]);
+},[205]);
 //# sourceMappingURL=main.js.map
